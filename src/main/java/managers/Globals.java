@@ -9,12 +9,12 @@ import pojo.Mouse;
 
 import com.jogamp.opengl.util.texture.Texture;
 
-public class DataManager {
+public class Globals {
 
-    private DataManager() {
+    private Globals() {
     }
 
-    private static DataManager instance = null;
+    private static Globals instance = null;
 
     public static final String PATH = "lab6.dcm";
     public static int NEW_MAX_GREYSCALE = 255;
@@ -38,11 +38,11 @@ public class DataManager {
         return frame;
     }
 
-    public int getCurrentTexturesAndTitle() {
+    public int getCurrentIndex() {
         return currentTexturesAndTitle;
     }
 
-    public void setCurrentTexturesAndTitle(int currentTexturesAndTitle) {
+    public void setCurrentIndex(int currentTexturesAndTitle) {
         this.currentTexturesAndTitle = currentTexturesAndTitle;
     }
 
@@ -66,9 +66,9 @@ public class DataManager {
         this.image = image;
     }
 
-    public static DataManager getInstance() {
+    public static Globals getInstance() {
         if (instance == null)
-            instance = new DataManager();
+            instance = new Globals();
         return instance;
     }
 }

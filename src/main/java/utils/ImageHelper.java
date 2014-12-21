@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import managers.DataManager;
+import managers.Globals;
 import pojo.Pixel;
 
 public class ImageHelper {
@@ -68,7 +68,7 @@ public class ImageHelper {
         double min = getMin(pixels);
         double max = getMax(pixels);
 
-        pixels.forEach((pixel) -> pixel.setColor((int) ((pixel.getGrayScale() - min) / max * DataManager.NEW_MAX_GREYSCALE)));
+        pixels.forEach((pixel) -> pixel.setColor((int) ((pixel.getGrayScale() - min) / max * Globals.NEW_MAX_GREYSCALE)));
 
         return createImageFromPixelsList(pixels, original.getWidth(), original.getHeight());
     }

@@ -1,3 +1,5 @@
+import ij.plugin.DICOM;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -6,41 +8,41 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import managers.DataManager;
+import managers.Globals;
 import utils.ImageHelper;
-import event.listeners.KeyEventListener;
-import event.listeners.MouseEventListener;
-import event.listeners.Rendering;
+import event.listeners.MyKeyListener;
+import event.listeners.MyMouseMotionListener;
+import event.listeners.MyGLEventListener;
 
 public class Main {
 
     public static void main(String[] args) {
+        Globals globals = Globals.getInstance();
+        DICOM dicom = ImageHelper.readDicom(Globals.PATH);
+        globals.setImage(dicom);
+        int width = dicom.getWidth();
+        int height = dicom.getHeight();
 
-        // Deploying BufferedImage from DICOM to managers.DataManager...
-        DataManager.getInstance().setImage(ImageHelper.readDicom(DataManager.PATH));
-
-        launchSwingWithOpenGL2(DataManager.getInstance().getImage().getWidth(), DataManager.getInstance().getImage().getHeight());
+        launch(width, height);
     }
 
-    public static void launchSwingWithOpenGL2(int width, int height) {
+    public static void launch(int width, int height) {
+        Globals globals = Globals.getInstance();
+        GLCanvas canvas = globals.getCanvas();
 
-        GLCanvas canvas = DataManager.getInstance().getCanvas();
         canvas.setPreferredSize(new Dimension(width, height));
+        canvas.addGLEventListener(new MyGLEventListener());
+        canvas.addKeyListener(new MyKeyListener());
+        canvas.addMouseMotionListener(new MyMouseMotionListener());
 
-        canvas.addGLEventListener(new Rendering());
-        canvas.addKeyListener(new KeyEventListener());
-        canvas.addMouseMotionListener(new MouseEventListener());
+        final JFrame frame = globals.getFrame();
 
-        final JFrame frame = DataManager.getInstance().getFrame();
-
-        // Set the GUI content
         frame.getContentPane().add(canvas, BorderLayout.CENTER);
-
-        // Set default options ...
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
 
         SwingUtilities.invokeLater(() -> frame.setVisible(true));
     }
+
 }
