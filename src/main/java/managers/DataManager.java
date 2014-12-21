@@ -1,17 +1,20 @@
 package managers;
 
-import com.jogamp.opengl.util.texture.Texture;
 import ij.plugin.DICOM;
-import pojo.Mouse;
 
 import javax.media.opengl.awt.GLCanvas;
-import javax.swing.*;
+import javax.swing.JFrame;
+
+import pojo.Mouse;
+
+import com.jogamp.opengl.util.texture.Texture;
 
 public class DataManager {
 
-    private DataManager(){}
-    private static DataManager instance = null;
+    private DataManager() {
+    }
 
+    private static DataManager instance = null;
 
     public static final String PATH = "lab6.dcm";
     public static int NEW_MAX_GREYSCALE = 255;
@@ -19,11 +22,11 @@ public class DataManager {
     private GLCanvas canvas = new GLCanvas();
     private final JFrame frame = new JFrame();
 
-    private DICOM image=null;
+    private DICOM image = null;
 
-    private int currentTexturesAndTitle =0;
+    private int currentTexturesAndTitle = 0;
     private Texture[] textures = new Texture[2];
-    private String[] titles = {"Original","Roberts Filter"};
+    private String[] titles = { "Original", "Roberts Filter" };
 
     private Mouse mouse = new Mouse();
 
@@ -63,8 +66,8 @@ public class DataManager {
         this.image = image;
     }
 
-    public static DataManager getInstance(){
-        if(instance == null)
+    public static DataManager getInstance() {
+        if (instance == null)
             instance = new DataManager();
         return instance;
     }

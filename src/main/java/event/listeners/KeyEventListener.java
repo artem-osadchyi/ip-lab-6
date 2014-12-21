@@ -1,13 +1,12 @@
 package event.listeners;
 
-import managers.DataManager;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 
-public class KeyEventListener implements KeyListener {
+import managers.DataManager;
 
+public class KeyEventListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -27,8 +26,8 @@ public class KeyEventListener implements KeyListener {
             DataManager.getInstance().getCanvas().display();
         }
 
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-            DataManager.getInstance().getFrame().dispatchEvent(new WindowEvent(DataManager.getInstance().getFrame(),WindowEvent.WINDOW_CLOSING));
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            DataManager.getInstance().getFrame().dispatchEvent(new WindowEvent(DataManager.getInstance().getFrame(), WindowEvent.WINDOW_CLOSING));
     }
 
     @Override

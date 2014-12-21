@@ -1,10 +1,11 @@
 package event.listeners;
 
-import managers.DataManager;
-
-import javax.media.opengl.awt.GLCanvas;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+
+import javax.media.opengl.awt.GLCanvas;
+
+import managers.DataManager;
 
 public class MouseEventListener implements MouseMotionListener {
 
